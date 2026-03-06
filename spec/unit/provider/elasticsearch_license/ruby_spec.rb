@@ -22,9 +22,9 @@ describe Puppet::Type.type(:elasticsearch_license).provider(:ruby) do # rubocop:
           'max_nodes' => 1_000,
           'issued_to' => 'test',
           'issuer' => 'elasticsearch',
-          'start_date_in_millis' => 1_513_814_400_000
-        }
-      }
+          'start_date_in_millis' => 1_513_814_400_000,
+        },
+      },
     }
   end
 
@@ -41,8 +41,8 @@ describe Puppet::Type.type(:elasticsearch_license).provider(:ruby) do # rubocop:
         'max_nodes' => '1000',
         'issued_to' => 'test',
         'issuer' => 'elasticsearch',
-        'start_date_in_millis' => '1513814400000'
-      }
+        'start_date_in_millis' => '1513814400000',
+      },
     }
   end
 
@@ -53,9 +53,9 @@ describe Puppet::Type.type(:elasticsearch_license).provider(:ruby) do # rubocop:
       name: name,
       settings: {
         'index' => {
-          'number_of_replicas' => 0
-        }
-      }
+          'number_of_replicas' => 0,
+        },
+      },
     }
   end
 

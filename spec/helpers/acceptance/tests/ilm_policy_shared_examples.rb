@@ -47,8 +47,8 @@ shared_examples 'ILM policy content' do |es_config, ilm_policy, _name|
     subject { shell("curl http://localhost:#{elasticsearch_port}/_ilm/policy") }
 
     it 'returns the configured ILM policy', :with_retries do
-      expect(JSON.parse(subject.stdout).values).
-        to include(include(ilm_policy))
+      expect(JSON.parse(subject.stdout).values)
+        .to include(include(ilm_policy))
     end
   end
 end
@@ -62,13 +62,13 @@ shared_examples 'ILM policy operations' do |es_config, ilm_policy|
       create_remote_file(
         default,
         "#{default.puppet['codedir']}/modules/another/files/good.json",
-        JSON.dump(ilm_policy)
+        JSON.dump(ilm_policy),
       )
 
       create_remote_file(
         default,
         "#{default.puppet['codedir']}/modules/another/files/bad.json",
-        JSON.dump(ilm_policy)[0..-5]
+        JSON.dump(ilm_policy)[0..-5],
       )
     end
 
@@ -79,7 +79,7 @@ shared_examples 'ILM policy operations' do |es_config, ilm_policy|
           es_config,
           SecureRandom.hex(8),
           ilm_policy,
-          "source => 'puppet:///modules/another/good.json'"
+          "source => 'puppet:///modules/another/good.json'",
         )
       end
 
@@ -89,7 +89,7 @@ shared_examples 'ILM policy operations' do |es_config, ilm_policy|
           es_config,
           SecureRandom.hex(8),
           ilm_policy,
-          "content => '#{JSON.dump(ilm_policy)}'"
+          "content => '#{JSON.dump(ilm_policy)}'",
         )
       end
 

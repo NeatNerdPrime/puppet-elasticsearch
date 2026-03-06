@@ -17,7 +17,7 @@ describe Puppet::Type.type(:elasticsearch_index_template) do
         expect do
           described_class.new(
             name: resource_name,
-            ensure: :present
+            ensure: :present,
           )
         end.to raise_error(Puppet::Error, %r{content.*or.*source.*required})
       end
@@ -27,7 +27,7 @@ describe Puppet::Type.type(:elasticsearch_index_template) do
           described_class.new(
             name: resource_name,
             content: {},
-            source: 'puppet:///example.json'
+            source: 'puppet:///example.json',
           )
         end.to raise_error(Puppet::Error, %r{simultaneous})
       end
@@ -36,20 +36,20 @@ describe Puppet::Type.type(:elasticsearch_index_template) do
         file_stub = 'foo'.dup
         [
           Puppet::FileServing::Metadata,
-          Puppet::FileServing::Content
+          Puppet::FileServing::Content,
         ].each do |klass|
-          allow(klass).to receive(:indirection).
-            and_return(Object)
+          allow(klass).to receive(:indirection)
+            .and_return(Object)
         end
-        allow(Object).to receive(:find).
-          and_return(file_stub)
-        allow(file_stub).to receive(:content).
-          and_return('{"index_patterns":["foobar-*"]}')
+        allow(Object).to receive(:find)
+          .and_return(file_stub)
+        allow(file_stub).to receive(:content)
+          .and_return('{"index_patterns":["foobar-*"]}')
         expect(described_class.new(
           name: resource_name,
-          source: '/example.json'
+          source: '/example.json',
         )[:content]).to include(
-          'index_patterns' => ['foobar-*']
+          'index_patterns' => ['foobar-*'],
         )
       end
 
@@ -60,10 +60,10 @@ describe Puppet::Type.type(:elasticsearch_index_template) do
             'index_patterns' => ['foo-*'],
             'template' => {
               'settings' => {
-                'number_of_shards' => 1
-              }
-            }
-          }
+                'number_of_shards' => 1,
+              },
+            },
+          },
         )[:content]).to eq(
           {
             'index_patterns' => ['foo-*'],
@@ -71,11 +71,11 @@ describe Puppet::Type.type(:elasticsearch_index_template) do
             'template' => {
               'settings' => {
                 'index' => {
-                  'number_of_shards' => 1
-                }
-              }
-            }
-          }
+                  'number_of_shards' => 1,
+                },
+              },
+            },
+          },
         )
       end
 
@@ -86,20 +86,20 @@ describe Puppet::Type.type(:elasticsearch_index_template) do
             'template' => {
               'settings' => {
                 'number_of_replicas' => '2',
-                'index.number_of_shards' => '3'
-              }
-            }
-          }
+                'index.number_of_shards' => '3',
+              },
+            },
+          },
         )[:content]).to eq(
           'composed_of' => [],
           'template' => {
             'settings' => {
               'index' => {
                 'number_of_replicas' => 2,
-                'number_of_shards' => 3
-              }
-            }
-          }
+                'number_of_shards' => 3,
+              },
+            },
+          },
         )
       end
     end
@@ -129,12 +129,12 @@ describe Puppet::Type.type(:elasticsearch_index_template) do
       is_template = described_class.new(
         name: resource_name,
         ensure: 'present',
-        content: json
+        content: json,
       ).property(:content)
       should_template = described_class.new(
         name: resource_name,
         ensure: 'present',
-        content: deep_stringify(json)
+        content: deep_stringify(json),
       ).property(:content).should
 
       expect(is_template).to be_insync(should_template)

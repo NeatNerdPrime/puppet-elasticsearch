@@ -51,8 +51,8 @@ shared_examples 'SLM policy content' do |es_config, slm_policy, _name|
     subject { shell("curl http://localhost:#{elasticsearch_port}/_slm/policy") }
 
     it 'returns the configured SLM policy', :with_retries do
-      expect(JSON.parse(subject.stdout).values).
-        to include(include('policy' => slm_policy))
+      expect(JSON.parse(subject.stdout).values)
+        .to include(include('policy' => slm_policy))
     end
   end
 end
@@ -66,20 +66,20 @@ shared_examples 'SLM policy operations' do |es_config, slm_policy|
       create_remote_file(
         default,
         "#{default.puppet['codedir']}/modules/another/files/good.json",
-        JSON.dump(slm_policy)
+        JSON.dump(slm_policy),
       )
 
       create_remote_file(
         default,
         "#{default.puppet['codedir']}/modules/another/files/bad.json",
-        JSON.dump(slm_policy)[0..-5]
+        JSON.dump(slm_policy)[0..-5],
       )
     end
 
     es_config = {
       'http.port' => 9200,
       'node.name' => 'elasticsearchSlm01',
-      'path.repo' => '/var/lib/elasticsearch'
+      'path.repo' => '/var/lib/elasticsearch',
     }
 
     # Override the manifest in order to populate 'path.repo'
@@ -119,7 +119,7 @@ shared_examples 'SLM policy operations' do |es_config, slm_policy|
           es_config,
           SecureRandom.hex(8),
           slm_policy,
-          "source => 'puppet:///modules/another/good.json'"
+          "source => 'puppet:///modules/another/good.json'",
         )
       end
 
@@ -129,7 +129,7 @@ shared_examples 'SLM policy operations' do |es_config, slm_policy|
           es_config,
           SecureRandom.hex(8),
           slm_policy,
-          "content => '#{JSON.dump(slm_policy)}'"
+          "content => '#{JSON.dump(slm_policy)}'",
         )
       end
 

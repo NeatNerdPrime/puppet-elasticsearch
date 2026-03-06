@@ -8,12 +8,12 @@ Puppet::Type.type(:elasticsearch_license).provide(
   metadata: :content,
   metadata_pipeline: [
     ->(data) { Puppet_X::Elastic.deep_to_s data },
-    ->(data) { Puppet_X::Elastic.deep_to_i data }
+    ->(data) { Puppet_X::Elastic.deep_to_i data },
   ],
   api_uri: '_license',
   query_string: {
-    'acknowledge' => 'true'
-  }
+    'acknowledge' => 'true',
+  },
 ) do
   desc 'A REST API based provider to manage Elasticsearch licenses.'
 
@@ -25,7 +25,7 @@ Puppet::Type.type(:elasticsearch_license).provide(
         :name => name.to_s,
         :ensure => :present,
         metadata => { 'license' => process_metadata(api_object) },
-        :provider => name
+        :provider => name,
       }
     end
   end

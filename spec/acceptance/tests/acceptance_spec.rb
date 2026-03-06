@@ -23,7 +23,7 @@ describe "elasticsearch v#{v[:elasticsearch_full_version]} class" do
     'cluster.name' => v[:cluster_name],
     'http.bind_host' => '0.0.0.0',
     'http.port' => 9200,
-    'node.name' => 'elasticsearch01'
+    'node.name' => 'elasticsearch01',
   }
 
   let(:elastic_repo) { !v[:is_snapshot] }
@@ -78,7 +78,7 @@ describe "elasticsearch v#{v[:elasticsearch_full_version]} class" do
     include_examples(
       'plugin acceptance tests',
       es_config,
-      v[:elasticsearch_plugins]
+      v[:elasticsearch_plugins],
     )
   end
 

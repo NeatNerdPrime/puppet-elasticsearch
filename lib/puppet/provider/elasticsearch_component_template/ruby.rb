@@ -19,8 +19,8 @@ Puppet::Type.type(:elasticsearch_component_template).provide(
       data.delete('component_template')
     },
     ->(data) { Puppet_X::Elastic.deep_to_s data },
-    ->(data) { Puppet_X::Elastic.deep_to_i data }
-  ]
+    ->(data) { Puppet_X::Elastic.deep_to_i data },
+  ],
 ) do
   desc 'A REST API based provider to manage Elasticsearch component templates.'
 
@@ -33,7 +33,7 @@ Puppet::Type.type(:elasticsearch_component_template).provide(
         :name => item['name'],
         :ensure => :present,
         metadata => process_metadata(item.keep_if { |key| key != 'name' }),
-        :provider => name
+        :provider => name,
       }
     end
   end

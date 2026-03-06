@@ -22,7 +22,7 @@ Puppet::Type.newtype(:elasticsearch_user) do
 
   newparam(
     :password,
-    required_features: :manages_plaintext_passwords
+    required_features: :manages_plaintext_passwords,
   ) do
     desc 'Plaintext password for user.'
 

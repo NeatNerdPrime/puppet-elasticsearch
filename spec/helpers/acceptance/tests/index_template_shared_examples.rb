@@ -47,8 +47,8 @@ shared_examples 'index template content' do |es_config, index_template, name|
     subject { shell("curl -s http://localhost:#{elasticsearch_port}/_index_template/#{name}") }
 
     it 'returns the installed index template', :with_retries do
-      expect(JSON.parse(subject.stdout)['index_templates']).
-        to include(include('name' => name, 'index_template' => index_template))
+      expect(JSON.parse(subject.stdout)['index_templates'])
+        .to include(include('name' => name, 'index_template' => index_template))
     end
   end
 end
@@ -62,13 +62,13 @@ shared_examples 'index template operations' do |es_config, index_template|
       create_remote_file(
         default,
         "#{default.puppet['codedir']}/modules/another/files/good.json",
-        JSON.dump(index_template)
+        JSON.dump(index_template),
       )
 
       create_remote_file(
         default,
         "#{default.puppet['codedir']}/modules/another/files/bad.json",
-        JSON.dump(index_template)[0..-5]
+        JSON.dump(index_template)[0..-5],
       )
     end
 
@@ -79,7 +79,7 @@ shared_examples 'index template operations' do |es_config, index_template|
           es_config,
           SecureRandom.hex(8),
           index_template,
-          "source => 'puppet:///modules/another/good.json'"
+          "source => 'puppet:///modules/another/good.json'",
         )
       end
 
@@ -89,7 +89,7 @@ shared_examples 'index template operations' do |es_config, index_template|
           es_config,
           SecureRandom.hex(8),
           index_template,
-          "content => '#{JSON.dump(index_template)}'"
+          "content => '#{JSON.dump(index_template)}'",
         )
       end
 

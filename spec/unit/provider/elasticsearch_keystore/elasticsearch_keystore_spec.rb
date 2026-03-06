@@ -10,8 +10,8 @@ shared_examples 'keystore instance' do |instance|
     it { expect(subject.name).to eq(instance) }
 
     it {
-      expect(subject.settings).
-        to eq(['node.name', 'cloud.aws.access_key'])
+      expect(subject.settings)
+        .to eq(['node.name', 'cloud.aws.access_key'])
     }
   end
 end
@@ -28,21 +28,21 @@ describe Puppet::Type.type(:elasticsearch_keystore).provider(:elasticsearch_keys
     described_class.instance_variable_set(:@defaults_dir, nil)
     described_class.instance_variable_set(:@home_dir, nil)
 
-    allow(described_class).
-      to receive(:command).
-      with(:keystore).
-      and_return(executable)
+    allow(described_class)
+      .to receive(:command)
+      .with(:keystore)
+      .and_return(executable)
 
-    allow(File).to receive(:exist?).
-      with('/etc/elasticsearch/scripts/elasticsearch.keystore').
-      and_return(false)
+    allow(File).to receive(:exist?)
+      .with('/etc/elasticsearch/scripts/elasticsearch.keystore')
+      .and_return(false)
   end
 
   describe 'instances' do
     before do
-      allow(Dir).to receive(:[]).
-        with('/etc/elasticsearch/*').
-        and_return((['scripts'] + instances).map do |directory|
+      allow(Dir).to receive(:[])
+        .with('/etc/elasticsearch/*')
+        .and_return((['scripts'] + instances).map do |directory|
           "/etc/elasticsearch/#{directory}"
         end)
 
@@ -50,28 +50,28 @@ describe Puppet::Type.type(:elasticsearch_keystore).provider(:elasticsearch_keys
         instance_dir = "/etc/elasticsearch/#{instance}"
         defaults_file = "/etc/default/elasticsearch-#{instance}"
 
-        allow(File).to receive(:exist?).
-          with("#{instance_dir}/elasticsearch.keystore").
-          and_return(true)
+        allow(File).to receive(:exist?)
+          .with("#{instance_dir}/elasticsearch.keystore")
+          .and_return(true)
 
-        allow(described_class).
-          to receive(:execute).
-          with(
+        allow(described_class)
+          .to receive(:execute)
+          .with(
             [executable, 'list'],
             {
               custom_environment: {
                 'ES_INCLUDE' => defaults_file,
-                'ES_PATH_CONF' => "/etc/elasticsearch/#{instance}"
+                'ES_PATH_CONF' => "/etc/elasticsearch/#{instance}",
               },
               uid: 'elasticsearch',
               gid: 'elasticsearch',
-              failonfail: true
-            }
-          ).
-          and_return(
+              failonfail: true,
+            },
+          )
+          .and_return(
             Puppet::Util::Execution::ProcessOutput.new(
               "node.name\ncloud.aws.access_key\n", 0
-            )
+            ),
           )
       end
     end
@@ -115,72 +115,72 @@ describe Puppet::Type.type(:elasticsearch_keystore).provider(:elasticsearch_keys
     let(:resource) do
       Puppet::Type.type(:elasticsearch_keystore).new(
         name: 'es-03',
-        provider: provider
+        provider: provider,
       )
     end
 
     it 'creates the keystore' do
       allow(described_class).to(
-        receive(:execute).
-          with(
+        receive(:execute)
+          .with(
             [executable, 'create'],
             {
               custom_environment: {
                 'ES_INCLUDE' => '/etc/default/elasticsearch-es-03',
-                'ES_PATH_CONF' => '/etc/elasticsearch/es-03'
+                'ES_PATH_CONF' => '/etc/elasticsearch/es-03',
               },
               uid: 'elasticsearch',
               gid: 'elasticsearch',
-              failonfail: true
-            }
-          ).
-          and_return(Puppet::Util::Execution::ProcessOutput.new('', 0))
+              failonfail: true,
+            },
+          )
+          .and_return(Puppet::Util::Execution::ProcessOutput.new('', 0)),
       )
       resource[:ensure] = :present
       provider.create
       provider.flush
       expect(described_class).to(
-        have_received(:execute).
-          with(
+        have_received(:execute)
+          .with(
             [executable, 'create'],
             {
               custom_environment: {
                 'ES_INCLUDE' => '/etc/default/elasticsearch-es-03',
-                'ES_PATH_CONF' => '/etc/elasticsearch/es-03'
+                'ES_PATH_CONF' => '/etc/elasticsearch/es-03',
               },
               uid: 'elasticsearch',
               gid: 'elasticsearch',
-              failonfail: true
-            }
-          )
+              failonfail: true,
+            },
+          ),
       )
     end
 
     it 'deletes the keystore' do
       allow(File).to(
-        receive(:delete).
-          with(File.join(%w[/ etc elasticsearch es-03 elasticsearch.keystore]))
+        receive(:delete)
+          .with(File.join(%w[/ etc elasticsearch es-03 elasticsearch.keystore])),
       )
       resource[:ensure] = :absent
       provider.destroy
       provider.flush
       expect(File).to(
-        have_received(:delete).
-          with(File.join(%w[/ etc elasticsearch es-03 elasticsearch.keystore]))
+        have_received(:delete)
+          .with(File.join(%w[/ etc elasticsearch es-03 elasticsearch.keystore])),
       )
     end
 
     it 'updates settings' do
       settings = {
         'cloud.aws.access_key' => 'AKIAFOOBARFOOBAR',
-        'cloud.aws.secret_key' => 'AKIAFOOBARFOOBAR'
+        'cloud.aws.secret_key' => 'AKIAFOOBARFOOBAR',
       }
 
       settings.each do |setting, value|
         allow(provider.class).to(
-          receive(:run_keystore).
-            with(['add', '--force', '--stdin', setting], 'es-03', '/etc/elasticsearch', value).
-            and_return(Puppet::Util::Execution::ProcessOutput.new('', 0))
+          receive(:run_keystore)
+            .with(['add', '--force', '--stdin', setting], 'es-03', '/etc/elasticsearch', value)
+            .and_return(Puppet::Util::Execution::ProcessOutput.new('', 0)),
         )
       end
 
@@ -193,8 +193,8 @@ describe Puppet::Type.type(:elasticsearch_keystore).provider(:elasticsearch_keys
 
       settings.each do |setting, value|
         expect(provider.class).to(
-          have_received(:run_keystore).
-            with(['add', '--force', '--stdin', setting], 'es-03', '/etc/elasticsearch', value)
+          have_received(:run_keystore)
+            .with(['add', '--force', '--stdin', setting], 'es-03', '/etc/elasticsearch', value),
         )
       end
     end

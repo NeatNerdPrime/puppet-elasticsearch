@@ -56,7 +56,7 @@ Puppet::Type.newtype(:elasticsearch_ilm_policy) do
       if !self[:content].nil? && !self[:source].nil?
         fail(
           Puppet::ParseError,
-          "'content' and 'source' cannot be simultaneously defined"
+          "'content' and 'source' cannot be simultaneously defined",
         )
       end
     end
@@ -70,7 +70,7 @@ Puppet::Type.newtype(:elasticsearch_ilm_policy) do
                 && catalog.respond_to?(:environment_instance)
               Puppet::FileServing::Content.indirection.find(
                 self[:source],
-                environment: catalog.environment_instance
+                environment: catalog.environment_instance,
               )
             else
               Puppet::FileServing::Content.indirection.find(self[:source])
