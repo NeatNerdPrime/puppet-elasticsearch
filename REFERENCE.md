@@ -49,11 +49,11 @@
 
 ### Functions
 
-* [`array_suffix`](#array_suffix): This function applies a suffix to all elements in an array.  *Examples:*      array_suffix(['a','b','c'], 'p')  Will return: ['ap','bp','cp']
+* [`array_suffix`](#array_suffix)
 * [`concat_merge`](#concat_merge): Merges two or more hashes together concatenating duplicate keys with array values and returns the resulting hash.  For example:      $hash1 =
 * [`deep_implode`](#deep_implode): Recursively flattens all keys of a hash into a dot-notated hash, deeply merging duplicate key values by natively combining them and returns t
 * [`es_plugin_name`](#es_plugin_name): Given a string, return the best guess at what the directory name will be for the given plugin. Any arguments past the first will be fallbacks
-* [`plugin_dir`](#plugin_dir): Extracts the end plugin directory of the name
+* [`plugin_dir`](#plugin_dir)
 
 ### Data types
 
@@ -186,17 +186,23 @@ System modifications (if any) will be reverted as well as possible (e.g.
 removal of created users, services, changed log settings, and so on).
 This is a destructive parameter and should be used with care.
 
+Default value: `'present'`
+
 ##### <a name="-elasticsearch--api_basic_auth_password"></a>`api_basic_auth_password`
 
 Data type: `Optional[String]`
 
 Defines the default REST basic auth password for API authentication.
 
+Default value: `undef`
+
 ##### <a name="-elasticsearch--api_basic_auth_username"></a>`api_basic_auth_username`
 
 Data type: `Optional[String]`
 
 Defines the default REST basic auth username for API authentication.
+
+Default value: `undef`
 
 ##### <a name="-elasticsearch--api_ca_file"></a>`api_ca_file`
 
@@ -205,6 +211,8 @@ Data type: `Optional[String]`
 Path to a CA file which will be used to validate server certs when
 communicating with the Elasticsearch API over HTTPS.
 
+Default value: `undef`
+
 ##### <a name="-elasticsearch--api_ca_path"></a>`api_ca_path`
 
 Data type: `Optional[String]`
@@ -212,11 +220,15 @@ Data type: `Optional[String]`
 Path to a directory with CA files which will be used to validate server
 certs when communicating with the Elasticsearch API over HTTPS.
 
+Default value: `undef`
+
 ##### <a name="-elasticsearch--api_host"></a>`api_host`
 
 Data type: `String`
 
 Default host to use when accessing Elasticsearch APIs.
+
+Default value: `'localhost'`
 
 ##### <a name="-elasticsearch--api_port"></a>`api_port`
 
@@ -224,17 +236,23 @@ Data type: `Integer[0, 65535]`
 
 Default port to use when accessing Elasticsearch APIs.
 
+Default value: `9200`
+
 ##### <a name="-elasticsearch--api_protocol"></a>`api_protocol`
 
 Data type: `Enum['http', 'https']`
 
 Default protocol to use when accessing Elasticsearch APIs.
 
+Default value: `'http'`
+
 ##### <a name="-elasticsearch--api_timeout"></a>`api_timeout`
 
 Data type: `Integer`
 
 Default timeout (in seconds) to use when accessing Elasticsearch APIs.
+
+Default value: `10`
 
 ##### <a name="-elasticsearch--autoupgrade"></a>`autoupgrade`
 
@@ -244,6 +262,8 @@ If set to `true`, any managed package will be upgraded on each Puppet run
 when the package provider is able to find a newer version than the present
 one. The exact behavior is provider dependent (see
 {package, "upgradeable"}[http://j.mp/xbxmNP] in the Puppet documentation).
+
+Default value: `false`
 
 ##### <a name="-elasticsearch--ca_certificate"></a>`ca_certificate`
 
@@ -268,6 +288,8 @@ Data type: `Hash`
 
 Elasticsearch configuration hash.
 
+Default value: `{}`
+
 ##### <a name="-elasticsearch--configdir"></a>`configdir`
 
 Data type: `Stdlib::Absolutepath`
@@ -275,12 +297,16 @@ Data type: `Stdlib::Absolutepath`
 Directory containing the elasticsearch configuration.
 Use this setting if your packages deviate from the norm (`/etc/elasticsearch`)
 
+Default value: `'/etc/elasticsearch'`
+
 ##### <a name="-elasticsearch--configdir_recurselimit"></a>`configdir_recurselimit`
 
 Data type: `Integer`
 
 Dictates how deeply the file copy recursion logic should descend when
 copying files from the `configdir` to instance `configdir`s.
+
+Default value: `2`
 
 ##### <a name="-elasticsearch--datadir"></a>`datadir`
 
@@ -294,11 +320,15 @@ Data type: `Optional[Stdlib::Absolutepath]`
 
 Absolute path to directory containing init defaults file.
 
+Default value: `undef`
+
 ##### <a name="-elasticsearch--download_tool"></a>`download_tool`
 
 Data type: `Optional[String]`
 
 Command-line invocation with which to retrieve an optional package_url.
+
+Default value: `undef`
 
 ##### <a name="-elasticsearch--download_tool_insecure"></a>`download_tool_insecure`
 
@@ -307,12 +337,16 @@ Data type: `Optional[String]`
 Command-line invocation with which to retrieve an optional package_url when
 certificate verification should be ignored.
 
+Default value: `undef`
+
 ##### <a name="-elasticsearch--download_tool_verify_certificates"></a>`download_tool_verify_certificates`
 
 Data type: `Boolean`
 
 Whether or not to verify SSL/TLS certificates when retrieving package files
 using a download tool instead of a package management provider.
+
+Default value: `true`
 
 ##### <a name="-elasticsearch--elasticsearch_group"></a>`elasticsearch_group`
 
@@ -339,11 +373,15 @@ Data type: `Hash`
 
 Define indices via a hash. This is mainly used with Hiera's auto binding.
 
+Default value: `{}`
+
 ##### <a name="-elasticsearch--init_defaults"></a>`init_defaults`
 
 Data type: `Hash`
 
 Defaults file content in hash representation.
+
+Default value: `{}`
 
 ##### <a name="-elasticsearch--init_defaults_file"></a>`init_defaults_file`
 
@@ -351,17 +389,23 @@ Data type: `Optional[String]`
 
 Defaults file as puppet resource.
 
+Default value: `undef`
+
 ##### <a name="-elasticsearch--init_template"></a>`init_template`
 
 Data type: `String`
 
 Service file as a template.
 
+Default value: `'%{module_name}/etc/init.d/elasticsearch.systemd.erb'`
+
 ##### <a name="-elasticsearch--jvm_options"></a>`jvm_options`
 
 Data type: `Array[String]`
 
 Array of options to set in jvm_options.
+
+Default value: `[]`
 
 ##### <a name="-elasticsearch--keystore_password"></a>`keystore_password`
 
@@ -385,11 +429,15 @@ Data type: `Optional[Variant[String, Hash]]`
 
 Optional Elasticsearch license in hash or string form.
 
+Default value: `undef`
+
 ##### <a name="-elasticsearch--logdir"></a>`logdir`
 
 Data type: `Stdlib::Absolutepath`
 
 Directory that will be used for Elasticsearch logging.
+
+Default value: `'/var/log/elasticsearch'`
 
 ##### <a name="-elasticsearch--logdir_mode"></a>`logdir_mode`
 
@@ -413,11 +461,15 @@ Data type: `Boolean`
 
 Enable datadir management (default true).
 
+Default value: `true`
+
 ##### <a name="-elasticsearch--manage_logdir"></a>`manage_logdir`
 
 Data type: `Boolean`
 
 Enable logdir management (default true).
+
+Default value: `true`
 
 ##### <a name="-elasticsearch--manage_repo"></a>`manage_repo`
 
@@ -425,11 +477,15 @@ Data type: `Boolean`
 
 Enable repo management by enabling official Elastic repositories.
 
+Default value: `true`
+
 ##### <a name="-elasticsearch--oss"></a>`oss`
 
 Data type: `Boolean`
 
 Whether to use the purely open source Elasticsearch package distribution.
+
+Default value: `false`
 
 ##### <a name="-elasticsearch--package_dir"></a>`package_dir`
 
@@ -443,6 +499,8 @@ Data type: `Integer`
 
 For http, https, and ftp downloads, you may set how long the exec resource
 may take.
+
+Default value: `600`
 
 ##### <a name="-elasticsearch--package_hold"></a>`package_hold`
 
@@ -458,11 +516,15 @@ Data type: `String`
 
 Name Of the package to install.
 
+Default value: `'elasticsearch'`
+
 ##### <a name="-elasticsearch--package_provider"></a>`package_provider`
 
 Data type: `Enum['package']`
 
 Method to install the packages, currently only `package` is supported.
+
+Default value: `'package'`
 
 ##### <a name="-elasticsearch--package_url"></a>`package_url`
 
@@ -472,17 +534,23 @@ URL of the package to download.
 This can be an http, https, or ftp resource for remote packages, or a
 `puppet://` resource or `file:/` for local packages
 
+Default value: `undef`
+
 ##### <a name="-elasticsearch--pid_dir"></a>`pid_dir`
 
 Data type: `Optional[Stdlib::Absolutepath]`
 
 Directory where the elasticsearch process should write out its PID.
 
+Default value: `'/var/run/elasticsearch'`
+
 ##### <a name="-elasticsearch--pipelines"></a>`pipelines`
 
 Data type: `Hash`
 
 Define pipelines via a hash. This is mainly used with Hiera's auto binding.
+
+Default value: `{}`
 
 ##### <a name="-elasticsearch--plugindir"></a>`plugindir`
 
@@ -491,11 +559,15 @@ Data type: `Optional[Stdlib::Absolutepath]`
 Directory containing elasticsearch plugins.
 Use this setting if your packages deviate from the norm (/usr/share/elasticsearch/plugins)
 
+Default value: `undef`
+
 ##### <a name="-elasticsearch--plugins"></a>`plugins`
 
 Data type: `Hash`
 
 Define plugins via a hash. This is mainly used with Hiera's auto binding.
+
+Default value: `{}`
 
 ##### <a name="-elasticsearch--private_key"></a>`private_key`
 
@@ -521,17 +593,23 @@ For http and https downloads, you may set a proxy server to use. By default,
 no proxy is used.
 Format: `proto://[user:pass@]server[:port]/`
 
+Default value: `undef`
+
 ##### <a name="-elasticsearch--purge_configdir"></a>`purge_configdir`
 
 Data type: `Boolean`
 
 Purge the config directory of any unmanaged files.
 
+Default value: `false`
+
 ##### <a name="-elasticsearch--purge_package_dir"></a>`purge_package_dir`
 
 Data type: `Boolean`
 
 Purge package directory on removal
+
+Default value: `false`
 
 ##### <a name="-elasticsearch--purge_secrets"></a>`purge_secrets`
 
@@ -540,12 +618,16 @@ Data type: `Boolean`
 Whether or not keys present in the keystore will be removed if they are not
 present in the specified secrets hash.
 
+Default value: `false`
+
 ##### <a name="-elasticsearch--repo_stage"></a>`repo_stage`
 
 Data type: `Variant[Boolean, String]`
 
 Use stdlib stage setup for managing the repo instead of relationship
 ordering.
+
+Default value: `false`
 
 ##### <a name="-elasticsearch--restart_on_change"></a>`restart_on_change`
 
@@ -558,6 +640,8 @@ re-read configuration files, load new plugins, or start the service using an
 updated/changed executable. This may be undesireable in highly available
 environments. If all other restart_* parameters are left unset, the value of
 `restart_on_change` is used for all other restart_*_change defaults.
+
+Default value: `false`
 
 ##### <a name="-elasticsearch--restart_config_change"></a>`restart_config_change`
 
@@ -602,11 +686,15 @@ Data type: `Hash`
 
 Define roles via a hash. This is mainly used with Hiera's auto binding.
 
+Default value: `{}`
+
 ##### <a name="-elasticsearch--scripts"></a>`scripts`
 
 Data type: `Hash`
 
 Define scripts via a hash. This is mainly used with Hiera's auto binding.
+
+Default value: `{}`
 
 ##### <a name="-elasticsearch--secrets"></a>`secrets`
 
@@ -615,17 +703,23 @@ Data type: `Optional[Hash]`
 Optional default configuration hash of key/value pairs to store in the
 Elasticsearch keystore file. If unset, the keystore is left unmanaged.
 
+Default value: `undef`
+
 ##### <a name="-elasticsearch--service_name"></a>`service_name`
 
 Data type: `String`
 
 Elasticsearch service name
 
+Default value: `'elasticsearch'`
+
 ##### <a name="-elasticsearch--service_provider"></a>`service_provider`
 
 Data type: `Enum['init', 'openbsd', 'openrc', 'systemd']`
 
 The service resource type provider to use when managing elasticsearch instances.
+
+Default value: `'systemd'`
 
 ##### <a name="-elasticsearch--slm_policies"></a>`slm_policies`
 
@@ -641,12 +735,16 @@ Data type: `Hash`
 
 Define snapshot repositories via a hash. This is mainly used with Hiera's auto binding.
 
+Default value: `{}`
+
 ##### <a name="-elasticsearch--ssl"></a>`ssl`
 
 Data type: `Boolean`
 
 Whether to manage TLS certificates. Requires the ca_certificate,
 certificate, private_key and keystore_password parameters to be set.
+
+Default value: `false`
 
 ##### <a name="-elasticsearch--status"></a>`status`
 
@@ -662,6 +760,8 @@ does not care whether the service is running or not. For example, this may
 be useful if a cluster management software is used to decide when to start
 the service plus assuring it is running on the desired node.
 
+Default value: `'enabled'`
+
 ##### <a name="-elasticsearch--system_key"></a>`system_key`
 
 Data type: `Optional[String]`
@@ -669,17 +769,23 @@ Data type: `Optional[String]`
 Source for the x-pack system key. Valid values are any that are
 supported for the file resource `source` parameter.
 
+Default value: `undef`
+
 ##### <a name="-elasticsearch--systemd_service_path"></a>`systemd_service_path`
 
 Data type: `Stdlib::Absolutepath`
 
 Path to the directory in which to install systemd service units.
 
+Default value: `'/lib/systemd/system'`
+
 ##### <a name="-elasticsearch--templates"></a>`templates`
 
 Data type: `Hash`
 
 Define templates via a hash. This is mainly used with Hiera's auto binding.
+
+Default value: `{}`
 
 ##### <a name="-elasticsearch--index_templates"></a>`index_templates`
 
@@ -711,17 +817,23 @@ Data type: `Hash`
 
 Define templates via a hash. This is mainly used with Hiera's auto binding.
 
+Default value: `{}`
+
 ##### <a name="-elasticsearch--validate_tls"></a>`validate_tls`
 
 Data type: `Boolean`
 
 Enable TLS/SSL validation on API calls.
 
+Default value: `true`
+
 ##### <a name="-elasticsearch--version"></a>`version`
 
 Data type: `Variant[String, Boolean]`
 
 To set the specific version you want to install.
+
+Default value: `false`
 
 ### <a name="elasticsearch--config"></a>`elasticsearch::config`
 
@@ -2391,7 +2503,6 @@ The following parameters are available in the `elasticsearch_keystore` type.
 
 * [`configdir`](#-elasticsearch_keystore--configdir)
 * [`instance`](#-elasticsearch_keystore--instance)
-* [`provider`](#-elasticsearch_keystore--provider)
 * [`purge`](#-elasticsearch_keystore--purge)
 
 ##### <a name="-elasticsearch_keystore--configdir"></a>`configdir`
@@ -2403,11 +2514,6 @@ Default value: `/etc/elasticsearch`
 ##### <a name="-elasticsearch_keystore--instance"></a>`instance`
 
 Elasticsearch instance this keystore belongs to.
-
-##### <a name="-elasticsearch_keystore--provider"></a>`provider`
-
-The specific backend to use for this `elasticsearch_keystore` resource. You will seldom need to specify this --- Puppet
-will usually discover the appropriate provider for your platform.
 
 ##### <a name="-elasticsearch_keystore--purge"></a>`purge`
 
@@ -2847,8 +2953,6 @@ User name.
 
 Plaintext password for user.
 
-Required features: manages_plaintext_passwords.
-
 ##### <a name="-elasticsearch_user--provider"></a>`provider`
 
 The specific backend to use for this `elasticsearch_user` resource. You will seldom need to specify this --- Puppet will
@@ -3009,25 +3113,13 @@ Default value: `60`
 
 Type: Ruby 3.x API
 
-This function applies a suffix to all elements in an array.
-
-*Examples:*
-
-    array_suffix(['a','b','c'], 'p')
-
-Will return: ['ap','bp','cp']
+The array_suffix function.
 
 #### `array_suffix()`
 
-This function applies a suffix to all elements in an array.
+The array_suffix function.
 
-*Examples:*
-
-    array_suffix(['a','b','c'], 'p')
-
-Will return: ['ap','bp','cp']
-
-Returns: `Any` Array
+Returns: `Any`
 
 ### <a name="concat_merge"></a>`concat_merge`
 
@@ -3145,13 +3237,13 @@ Returns: `Any` String
 
 Type: Ruby 3.x API
 
-Extracts the end plugin directory of the name
+The plugin_dir function.
 
 #### `plugin_dir()`
 
-Extracts the end plugin directory of the name
+The plugin_dir function.
 
-Returns: `Any` String
+Returns: `Any`
 
 ## Data types
 
