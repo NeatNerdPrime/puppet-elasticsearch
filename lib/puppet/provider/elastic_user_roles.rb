@@ -27,7 +27,7 @@ class Puppet::Provider::ElasticUserRoles < Puppet::Provider::ElasticYaml
       # Map those hashes into what the provider expects
       {
         name: user,
-        roles: roles
+        roles: roles,
       }
     end
     lines.to_a

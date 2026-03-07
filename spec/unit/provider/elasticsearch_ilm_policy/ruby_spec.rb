@@ -12,11 +12,11 @@ describe Puppet::Type.type(:elasticsearch_ilm_policy).provider(:ruby) do # ruboc
         'policy' => {
           'phases' => {
             'cold' => {
-              'min_age' => '30d'
-            }
-          }
-        }
-      }
+              'min_age' => '30d',
+            },
+          },
+        },
+      },
     }
   end
 
@@ -26,11 +26,11 @@ describe Puppet::Type.type(:elasticsearch_ilm_policy).provider(:ruby) do # ruboc
         'policy' => {
           'phases' => {
             'cold' => {
-              'min_age' => '30d'
-            }
-          }
-        }
-      }
+              'min_age' => '30d',
+            },
+          },
+        },
+      },
     }
   end
   let(:example2) do
@@ -42,11 +42,11 @@ describe Puppet::Type.type(:elasticsearch_ilm_policy).provider(:ruby) do # ruboc
         'policy' => {
           'phases' => {
             'warm' => {
-              'min_age' => '15d'
-            }
-          }
-        }
-      }
+              'min_age' => '15d',
+            },
+          },
+        },
+      },
     }
   end
 
@@ -56,17 +56,17 @@ describe Puppet::Type.type(:elasticsearch_ilm_policy).provider(:ruby) do # ruboc
         'policy' => {
           'phases' => {
             'warm' => {
-              'min_age' => '15d'
-            }
-          }
-        }
-      }
+              'min_age' => '15d',
+            },
+          },
+        },
+      },
     }
   end
 
   let(:bare_resource) do
     JSON.dump(
-      {}
+      {},
     )
   end
 
@@ -75,7 +75,7 @@ describe Puppet::Type.type(:elasticsearch_ilm_policy).provider(:ruby) do # ruboc
   let(:props) do
     {
       name: 'foo',
-      content: {}
+      content: {},
     }
   end
 

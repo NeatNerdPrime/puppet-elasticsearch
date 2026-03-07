@@ -44,7 +44,7 @@ shared_examples 'plugin acceptance tests' do |es_config, plugins|
               'plugin API response',
               es_config,
               'reports the plugin as installed',
-              'name' => plugin
+              'name' => plugin,
             )
           end
 
@@ -53,7 +53,7 @@ shared_examples 'plugin acceptance tests' do |es_config, plugins|
               scp_to(
                 default,
                 meta[:path],
-                "#{default.puppet['codedir']}/modules/another/files/#{plugin}.zip"
+                "#{default.puppet['codedir']}/modules/another/files/#{plugin}.zip",
               )
             end
 
@@ -71,7 +71,7 @@ shared_examples 'plugin acceptance tests' do |es_config, plugins|
               'plugin API response',
               es_config,
               'reports the plugin as installed',
-              'name' => plugin
+              'name' => plugin,
             )
           end
 
@@ -90,7 +90,7 @@ shared_examples 'plugin acceptance tests' do |es_config, plugins|
               'plugin API response',
               es_config,
               'reports the plugin as installed',
-              'name' => plugin
+              'name' => plugin,
             )
           end
         end

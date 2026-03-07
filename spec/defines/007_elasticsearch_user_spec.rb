@@ -17,7 +17,7 @@ describe 'elasticsearch::user' do
       let(:facts) do
         facts.merge(
           scenario: '',
-          common: ''
+          common: '',
         )
       end
 
@@ -25,7 +25,7 @@ describe 'elasticsearch::user' do
         let(:params) do
           {
             password: 'foobar',
-            roles: %w[monitor user]
+            roles: %w[monitor user],
           }
         end
 
@@ -35,7 +35,7 @@ describe 'elasticsearch::user' do
         it do
           expect(subject).to contain_elasticsearch_user_roles('elastic').with(
             'ensure' => 'present',
-            'roles' => %w[monitor user]
+            'roles' => %w[monitor user],
           )
         end
       end
@@ -43,7 +43,7 @@ describe 'elasticsearch::user' do
       context 'ensure absent without password' do
         let(:params) do
           {
-            ensure: 'absent'
+            ensure: 'absent',
           }
         end
 
@@ -54,7 +54,7 @@ describe 'elasticsearch::user' do
       context 'ensure present without password' do
         let(:params) do
           {
-            ensure: 'present'
+            ensure: 'present',
           }
         end
 
@@ -80,7 +80,7 @@ describe 'elasticsearch::user' do
         let(:params) do
           {
             password: 'foobar',
-            roles: %w[monitor user]
+            roles: %w[monitor user],
           }
         end
 
@@ -89,12 +89,12 @@ describe 'elasticsearch::user' do
         it { is_expected.to contain_elasticsearch_role_mapping('test_role') }
 
         it {
-          expect(subject).to contain_elasticsearch__user('elastic').
-            that_comes_before([
-                                'Elasticsearch::Template[foo]'
-                              ]).that_requires([
-                                                 'Elasticsearch::Role[test_role]'
-                                               ])
+          expect(subject).to contain_elasticsearch__user('elastic')
+            .that_comes_before([
+                                 'Elasticsearch::Template[foo]',
+                               ]).that_requires([
+                                                  'Elasticsearch::Role[test_role]',
+                                                ])
         }
 
         include_examples 'class', :systemd

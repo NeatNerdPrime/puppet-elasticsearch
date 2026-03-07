@@ -51,7 +51,7 @@ RSpec.configure do |c|
   end
 
   v[:elasticsearch_plugins] = Dir[
-    artifact("*#{v[:elasticsearch_full_version]}.zip", ['plugins'])
+    artifact("*#{v[:elasticsearch_full_version]}.zip", ['plugins']),
   ].to_h do |plugin|
     plugin_filename = File.basename(plugin)
     plugin_name = plugin_filename.match(%r{^(?<name>.+)-#{v[:elasticsearch_full_version]}.zip})[:name]
@@ -178,7 +178,7 @@ hosts.each do |host|
       v[:elasticsearch_full_version], [v[:ext]]
     ).flat_map do |url, filename|
       [[:url, url], [:filename, filename], [:path, artifact(filename)]]
-    end.to_h
+    end.to_h,
   )
 end
 

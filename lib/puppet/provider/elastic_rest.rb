@@ -34,12 +34,11 @@ class Puppet::Provider::ElasticREST < Puppet::Provider
                 username = nil,
                 password = nil,
                 validate_tls = true)
-
     if username && password
       req.basic_auth username, password
     elsif username || password
       Puppet.warning(
-        'username and password must both be defined, skipping basic auth'
+        'username and password must both be defined, skipping basic auth',
       )
     end
 
@@ -93,7 +92,6 @@ class Puppet::Provider::ElasticREST < Puppet::Provider
                        ca_file = nil,
                        ca_path = nil,
                        validate_tls = true)
-
     uri = URI("#{protocol}://#{host}:#{port}/#{format_uri(api_discovery_uri)}")
     http = Net::HTTP.new uri.host, uri.port
     req = Net::HTTP::Get.new uri.request_uri
@@ -119,7 +117,7 @@ class Puppet::Provider::ElasticREST < Puppet::Provider
         :name => object_name,
         :ensure => :present,
         metadata => process_metadata(api_object),
-        :provider => name
+        :provider => name,
       }
     end
   end
@@ -175,7 +173,7 @@ class Puppet::Provider::ElasticREST < Puppet::Provider
   end
 
   def initialize(value = {})
-    super(value)
+    super
     @property_flush = {}
   end
 
@@ -186,7 +184,7 @@ class Puppet::Provider::ElasticREST < Puppet::Provider
         { metadata.to_s => resource[metadata] }
       else
         resource[metadata]
-      end
+      end,
     )
   end
 
@@ -200,8 +198,8 @@ class Puppet::Provider::ElasticREST < Puppet::Provider
         resource[:protocol],
         resource[:host],
         resource[:port],
-        self.class.format_uri(resource[:name], @property_flush)
-      )
+        self.class.format_uri(resource[:name], @property_flush),
+      ),
     )
     uri.query = URI.encode_www_form query_string if query_string
 
@@ -222,7 +220,7 @@ class Puppet::Provider::ElasticREST < Puppet::Provider
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = uri.scheme == 'https'
     %i[ca_file ca_path].each do |arg|
-      http.send "#{arg}=".to_sym, resource[arg] if !resource[arg].nil? && http.respond_to?(arg)
+      http.send :"#{arg}=", resource[arg] if !resource[arg].nil? && http.respond_to?(arg)
     end
 
     response = self.class.rest(
@@ -231,7 +229,7 @@ class Puppet::Provider::ElasticREST < Puppet::Provider
       resource[:timeout],
       resource[:username],
       resource[:password],
-      resource[:validate_tls]
+      resource[:validate_tls],
     )
 
     # Attempt to return useful error output
@@ -264,7 +262,7 @@ class Puppet::Provider::ElasticREST < Puppet::Provider
       resource[:password],
       resource[:ca_file],
       resource[:ca_path],
-      resource[:validate_tls].nil? ? true : resource[:validate_tls]
+      resource[:validate_tls].nil? || resource[:validate_tls],
     ).find do |t|
       t[:name] == resource[:name]
     end

@@ -47,8 +47,8 @@ shared_examples 'component template content' do |es_config, component_template, 
     subject { shell("curl -s http://localhost:#{elasticsearch_port}/_component_template/#{name}") }
 
     it 'returns the installed component template', :with_retries do
-      expect(JSON.parse(subject.stdout)['component_templates']).
-        to include(include('name' => name, 'component_template' => component_template))
+      expect(JSON.parse(subject.stdout)['component_templates'])
+        .to include(include('name' => name, 'component_template' => component_template))
     end
   end
 end
@@ -62,13 +62,13 @@ shared_examples 'component template operations' do |es_config, component_templat
       create_remote_file(
         default,
         "#{default.puppet['codedir']}/modules/another/files/good.json",
-        JSON.dump(component_template)
+        JSON.dump(component_template),
       )
 
       create_remote_file(
         default,
         "#{default.puppet['codedir']}/modules/another/files/bad.json",
-        JSON.dump(component_template)[0..-5]
+        JSON.dump(component_template)[0..-5],
       )
     end
 
@@ -79,7 +79,7 @@ shared_examples 'component template operations' do |es_config, component_templat
           es_config,
           SecureRandom.hex(8),
           component_template,
-          "source => 'puppet:///modules/another/good.json'"
+          "source => 'puppet:///modules/another/good.json'",
         )
       end
 
@@ -89,7 +89,7 @@ shared_examples 'component template operations' do |es_config, component_templat
           es_config,
           SecureRandom.hex(8),
           component_template,
-          "content => '#{JSON.dump(component_template)}'"
+          "content => '#{JSON.dump(component_template)}'",
         )
       end
 

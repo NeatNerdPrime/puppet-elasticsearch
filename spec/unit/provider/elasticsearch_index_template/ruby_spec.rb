@@ -9,8 +9,8 @@ describe Puppet::Type.type(:elasticsearch_index_template).provider(:ruby) do # r
       ensure: :present,
       provider: :ruby,
       content: {
-        'index_patterns' => ['foorbar1-*']
-      }
+        'index_patterns' => ['foorbar1-*'],
+      },
     }
   end
 
@@ -21,11 +21,11 @@ describe Puppet::Type.type(:elasticsearch_index_template).provider(:ruby) do # r
           'name' => 'foobar1',
           'index_template' => {
             'index_patterns' => [
-              'foorbar1-*'
+              'foorbar1-*',
             ],
-          }
-        }
-      ]
+          },
+        },
+      ],
     }
   end
   let(:example2) do
@@ -37,10 +37,10 @@ describe Puppet::Type.type(:elasticsearch_index_template).provider(:ruby) do # r
         'index_patterns' => ['foorbar2-*'],
         'template' => {
           'settings' => {
-            'number_of_shards' => 1
-          }
-        }
-      }
+            'number_of_shards' => 1,
+          },
+        },
+      },
     }
   end
 
@@ -51,23 +51,23 @@ describe Puppet::Type.type(:elasticsearch_index_template).provider(:ruby) do # r
           'name' => 'foobar2',
           'index_template' => {
             'index_patterns' => [
-              'foorbar2-*'
+              'foorbar2-*',
             ],
             'template' => {
               'settings' => {
-                'number_of_shards' => 1
-              }
+                'number_of_shards' => 1,
+              },
             },
-          }
-        }
-      ]
+          },
+        },
+      ],
     }
   end
 
   let(:bare_resource) do
     JSON.dump(
       'composed_of' => [],
-      'index_patterns' => ['fooindex-*']
+      'index_patterns' => ['fooindex-*'],
     )
   end
 
@@ -78,8 +78,8 @@ describe Puppet::Type.type(:elasticsearch_index_template).provider(:ruby) do # r
       name: 'foo',
       content: {
         'index_patterns' => ['fooindex-*'],
-        'composed_of' => []
-      }
+        'composed_of' => [],
+      },
     }
   end
 

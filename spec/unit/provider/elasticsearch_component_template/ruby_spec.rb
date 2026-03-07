@@ -13,12 +13,12 @@ describe Puppet::Type.type(:elasticsearch_component_template).provider(:ruby) do
           'mappings' => {
             'properties' => {
               'dummy1' => {
-                'type' => 'keyword'
-              }
-            }
-          }
-        }
-      }
+                'type' => 'keyword',
+              },
+            },
+          },
+        },
+      },
     }
   end
 
@@ -32,14 +32,14 @@ describe Puppet::Type.type(:elasticsearch_component_template).provider(:ruby) do
               'mappings' => {
                 'properties' => {
                   'dummy1' => {
-                    'type' => 'keyword'
-                  }
-                }
-              }
-            }
-          }
-        }
-      ]
+                    'type' => 'keyword',
+                  },
+                },
+              },
+            },
+          },
+        },
+      ],
     }
   end
   let(:example2) do
@@ -52,12 +52,12 @@ describe Puppet::Type.type(:elasticsearch_component_template).provider(:ruby) do
           'mappings' => {
             'properties' => {
               'dummy2' => {
-                'type' => 'keyword'
-              }
-            }
-          }
-        }
-      }
+                'type' => 'keyword',
+              },
+            },
+          },
+        },
+      },
     }
   end
 
@@ -71,20 +71,20 @@ describe Puppet::Type.type(:elasticsearch_component_template).provider(:ruby) do
               'mappings' => {
                 'properties' => {
                   'dummy2' => {
-                    'type' => 'keyword'
-                  }
-                }
-              }
-            }
-          }
-        }
-      ]
+                    'type' => 'keyword',
+                  },
+                },
+              },
+            },
+          },
+        },
+      ],
     }
   end
 
   let(:bare_resource) do
     JSON.dump(
-      {}
+      {},
     )
   end
 
@@ -93,7 +93,7 @@ describe Puppet::Type.type(:elasticsearch_component_template).provider(:ruby) do
   let(:props) do
     {
       name: 'foo',
-      content: {}
+      content: {},
     }
   end
 

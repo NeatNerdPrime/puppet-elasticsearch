@@ -5,7 +5,7 @@ require 'spec_helper'
 describe 'jvm.options.epp' do
   let :harness do
     TemplateHarness.new(
-      'templates/etc/elasticsearch/jvm.options.d/jvm.options.epp'
+      'templates/etc/elasticsearch/jvm.options.d/jvm.options.epp',
     )
   end
 
@@ -13,7 +13,7 @@ describe 'jvm.options.epp' do
     harness.set(
       '@_sorted_jvm_options', [
         '-Xms2g',
-        '-Xmx2g'
+        '-Xmx2g',
       ]
     )
 
@@ -27,7 +27,7 @@ describe 'jvm.options.epp' do
     harness.set(
       '@_sorted_jvm_options', [
         '-Xms2g',
-        '-Xmx2g'
+        '-Xmx2g',
       ]
     )
 

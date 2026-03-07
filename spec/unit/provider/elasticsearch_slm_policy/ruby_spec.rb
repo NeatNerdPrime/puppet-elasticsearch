@@ -16,9 +16,9 @@ describe Puppet::Type.type(:elasticsearch_slm_policy).provider(:ruby) do # ruboc
         'retention' => {
           'expire_after' => '60d',
           'min_count' => 2,
-          'max_count' => 10
-        }
-      }
+          'max_count' => 10,
+        },
+      },
     }
   end
 
@@ -33,10 +33,10 @@ describe Puppet::Type.type(:elasticsearch_slm_policy).provider(:ruby) do # ruboc
           'retention' => {
             'expire_after' => '60d',
             'min_count' => 2,
-            'max_count' => 10
-          }
-        }
-      }
+            'max_count' => 10,
+          },
+        },
+      },
     }
   end
   let(:example2) do
@@ -52,9 +52,9 @@ describe Puppet::Type.type(:elasticsearch_slm_policy).provider(:ruby) do # ruboc
         'retention' => {
           'expire_after' => '60d',
           'min_count' => 2,
-          'max_count' => 10
-        }
-      }
+          'max_count' => 10,
+        },
+      },
     }
   end
 
@@ -69,16 +69,16 @@ describe Puppet::Type.type(:elasticsearch_slm_policy).provider(:ruby) do # ruboc
           'retention' => {
             'expire_after' => '60d',
             'min_count' => 2,
-            'max_count' => 10
-          }
-        }
-      }
+            'max_count' => 10,
+          },
+        },
+      },
     }
   end
 
   let(:bare_resource) do
     JSON.dump(
-      {}
+      {},
     )
   end
 
@@ -87,7 +87,7 @@ describe Puppet::Type.type(:elasticsearch_slm_policy).provider(:ruby) do # ruboc
   let(:props) do
     {
       name: 'foo',
-      content: {}
+      content: {},
     }
   end
 

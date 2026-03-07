@@ -29,7 +29,7 @@ Puppet::Type.newtype(:elasticsearch_index_template) do
     end
 
     def insync?(value)
-      Puppet_X::Elastic.deep_implode(value) == \
+      Puppet_X::Elastic.deep_implode(value) ==
         Puppet_X::Elastic.deep_implode(should)
     end
 
@@ -58,13 +58,13 @@ Puppet::Type.newtype(:elasticsearch_index_template) do
                             else
                               setting
                             end
-                  val['template']['settings']['index'][new_key] = \
+                  val['template']['settings']['index'][new_key] =
                     val['template']['settings'].delete setting
                 end
               end
-            end
-          )
-        )
+            end,
+          ),
+        ),
       )
     end
   end
@@ -87,7 +87,7 @@ Puppet::Type.newtype(:elasticsearch_index_template) do
       if !self[:content].nil? && !self[:source].nil?
         fail(
           Puppet::ParseError,
-          "'content' and 'source' cannot be simultaneously defined"
+          "'content' and 'source' cannot be simultaneously defined",
         )
       end
     end
@@ -101,7 +101,7 @@ Puppet::Type.newtype(:elasticsearch_index_template) do
                 && catalog.respond_to?(:environment_instance)
               Puppet::FileServing::Content.indirection.find(
                 self[:source],
-                environment: catalog.environment_instance
+                environment: catalog.environment_instance,
               )
             else
               Puppet::FileServing::Content.indirection.find(self[:source])

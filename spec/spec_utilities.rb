@@ -29,13 +29,13 @@ def to_agent_version(puppet_version)
     '4.2.1' => '1.2.2',
     '4.2.0' => '1.2.1',
     '4.1.0' => '1.1.1',
-    '4.0.0' => '1.0.1'
+    '4.0.0' => '1.0.1',
   }[puppet_version]
 end
 
 def derive_artifact_urls_for(full_version, plugins = ['analysis-icu'])
   derive_full_package_url(full_version).merge(
-    derive_plugin_urls_for(full_version, plugins)
+    derive_plugin_urls_for(full_version, plugins),
   )
 end
 

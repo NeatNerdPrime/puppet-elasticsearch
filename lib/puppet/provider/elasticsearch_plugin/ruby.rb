@@ -5,7 +5,7 @@ require 'puppet/provider/elastic_plugin'
 
 Puppet::Type.type(:elasticsearch_plugin).provide(
   :elasticsearch_plugin,
-  parent: Puppet::Provider::ElasticPlugin
+  parent: Puppet::Provider::ElasticPlugin,
 ) do
   desc <<-END
     Post-5.x provider for Elasticsearch bin/elasticsearch-plugin

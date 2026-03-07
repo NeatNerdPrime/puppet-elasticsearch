@@ -14,13 +14,13 @@ shared_examples 'plugin provider' do |version|
         allow(provider).to receive(:plugin).with(
           ['install', resource_name].tap do |args|
             args.insert 1, '--batch' if Puppet::Util::Package.versioncmp(version, '2.2.0') >= 0
-          end
+          end,
         )
         provider.create
         expect(provider).to have_received(:plugin).with(
           ['install', resource_name].tap do |args|
             args.insert 1, '--batch' if Puppet::Util::Package.versioncmp(version, '2.2.0') >= 0
-          end
+          end,
         )
       end
 
@@ -31,7 +31,7 @@ shared_examples 'plugin provider' do |version|
             args.unshift('kopf', '--url') if version.start_with? '1'
 
             args.unshift '--batch' if Puppet::Util::Package.versioncmp(version, '2.2.0') >= 0
-          end
+          end,
         )
         provider.create
         expect(provider).to have_received(:plugin).with(
@@ -39,7 +39,7 @@ shared_examples 'plugin provider' do |version|
             args.unshift('kopf', '--url') if version.start_with? '1'
 
             args.unshift '--batch' if Puppet::Util::Package.versioncmp(version, '2.2.0') >= 0
-          end
+          end,
         )
       end
 
@@ -50,7 +50,7 @@ shared_examples 'plugin provider' do |version|
             args.unshift('kopf', '--url') if version.start_with? '1'
 
             args.unshift '--batch' if Puppet::Util::Package.versioncmp(version, '2.2.0') >= 0
-          end
+          end,
         )
         provider.create
         expect(provider).to have_received(:plugin).with(
@@ -58,71 +58,71 @@ shared_examples 'plugin provider' do |version|
             args.unshift('kopf', '--url') if version.start_with? '1'
 
             args.unshift '--batch' if Puppet::Util::Package.versioncmp(version, '2.2.0') >= 0
-          end
+          end,
         )
       end
 
       describe 'proxying' do
         it 'installs behind a proxy' do
           resource[:proxy] = 'http://localhost:3128'
-          allow(provider).
-            to receive(:plugin).
-            with([
-                   '-Dhttp.proxyHost=localhost',
-                   '-Dhttp.proxyPort=3128',
-                   '-Dhttps.proxyHost=localhost',
-                   '-Dhttps.proxyPort=3128',
-                   'install',
-                   '--batch',
-                   resource_name
-                 ])
+          allow(provider)
+            .to receive(:plugin)
+            .with([
+                    '-Dhttp.proxyHost=localhost',
+                    '-Dhttp.proxyPort=3128',
+                    '-Dhttps.proxyHost=localhost',
+                    '-Dhttps.proxyPort=3128',
+                    'install',
+                    '--batch',
+                    resource_name,
+                  ])
           provider.create
-          expect(provider).
-            to have_received(:plugin).
-            with([
-                   '-Dhttp.proxyHost=localhost',
-                   '-Dhttp.proxyPort=3128',
-                   '-Dhttps.proxyHost=localhost',
-                   '-Dhttps.proxyPort=3128',
-                   'install',
-                   '--batch',
-                   resource_name
-                 ])
+          expect(provider)
+            .to have_received(:plugin)
+            .with([
+                    '-Dhttp.proxyHost=localhost',
+                    '-Dhttp.proxyPort=3128',
+                    '-Dhttps.proxyHost=localhost',
+                    '-Dhttps.proxyPort=3128',
+                    'install',
+                    '--batch',
+                    resource_name,
+                  ])
         end
 
         it 'uses authentication credentials' do
           resource[:proxy] = 'http://elastic:password@es.local:8080'
-          allow(provider).
-            to receive(:plugin).
-            with([
-                   '-Dhttp.proxyHost=es.local',
-                   '-Dhttp.proxyPort=8080',
-                   '-Dhttp.proxyUser=elastic',
-                   '-Dhttp.proxyPassword=password',
-                   '-Dhttps.proxyHost=es.local',
-                   '-Dhttps.proxyPort=8080',
-                   '-Dhttps.proxyUser=elastic',
-                   '-Dhttps.proxyPassword=password',
-                   'install',
-                   '--batch',
-                   resource_name
-                 ])
+          allow(provider)
+            .to receive(:plugin)
+            .with([
+                    '-Dhttp.proxyHost=es.local',
+                    '-Dhttp.proxyPort=8080',
+                    '-Dhttp.proxyUser=elastic',
+                    '-Dhttp.proxyPassword=password',
+                    '-Dhttps.proxyHost=es.local',
+                    '-Dhttps.proxyPort=8080',
+                    '-Dhttps.proxyUser=elastic',
+                    '-Dhttps.proxyPassword=password',
+                    'install',
+                    '--batch',
+                    resource_name,
+                  ])
           provider.create
-          expect(provider).
-            to have_received(:plugin).
-            with([
-                   '-Dhttp.proxyHost=es.local',
-                   '-Dhttp.proxyPort=8080',
-                   '-Dhttp.proxyUser=elastic',
-                   '-Dhttp.proxyPassword=password',
-                   '-Dhttps.proxyHost=es.local',
-                   '-Dhttps.proxyPort=8080',
-                   '-Dhttps.proxyUser=elastic',
-                   '-Dhttps.proxyPassword=password',
-                   'install',
-                   '--batch',
-                   resource_name
-                 ])
+          expect(provider)
+            .to have_received(:plugin)
+            .with([
+                    '-Dhttp.proxyHost=es.local',
+                    '-Dhttp.proxyPort=8080',
+                    '-Dhttp.proxyUser=elastic',
+                    '-Dhttp.proxyPassword=password',
+                    '-Dhttps.proxyHost=es.local',
+                    '-Dhttps.proxyPort=8080',
+                    '-Dhttps.proxyUser=elastic',
+                    '-Dhttps.proxyPassword=password',
+                    'install',
+                    '--batch',
+                    resource_name,
+                  ])
         end
       end
 
@@ -175,11 +175,11 @@ shared_examples 'plugin provider' do |version|
     describe 'removal' do
       it 'uninstalls the plugin' do
         allow(provider).to receive(:plugin).with(
-          ['remove', resource_name.split('-').last]
+          ['remove', resource_name.split('-').last],
         )
         provider.destroy
         expect(provider).to have_received(:plugin).with(
-          ['remove', resource_name.split('-').last]
+          ['remove', resource_name.split('-').last],
         )
       end
     end
